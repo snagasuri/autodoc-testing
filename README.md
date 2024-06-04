@@ -1,3 +1,6 @@
+# Autodoc- automatically updating documentation that grows with your codebase
+Autodoc works by using github actions to detect when a pull request is made, then it reviews the file, and takes the previous docs, and annexes the new information into the docs using llama 3, then pushes it to the readme file to update the github page automatically.
+
 # Documentation Updated for hi_there.txt
 A simple yet intriguing file!
 
