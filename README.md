@@ -14,7 +14,7 @@ Here is the concise description of the changes:
 
 **3. Impact on existing documentation:** The update does not appear to have any significant impact on existing documentation, as it primarily focuses on introducing the Autodoc project and its features.
 
-**4. Additional information:** The update changed the "Latest Update" section from "README.md" to "Unknown file", indicating that the previous update was not properly recorded.
+**4. Additional information:** The update changed the "Latest Update" section from "Unknown file" to "README.md".
 
 ---
 
