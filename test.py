@@ -1,220 +1,5 @@
-# import os
-# from flask import Flask, request, jsonify
-# import logging
-# from git import Repo, GitCommandError
-
-# app = Flask(__name__)
-
-# # Configure logging
-# logging.basicConfig(level=logging.INFO)
-
-# # Path to your local testing repository
-# CODE_REPO_PATH = r"C:\Users\ramna\Documents\autodoc-testing"
-
-# @app.route('/webhook', methods=['POST'])
-# def webhook():
-#     event = request.headers.get('X-GitHub-Event')
-#     payload = request.json
-
-#     logging.info(f"Received event: {event}")
-
-#     if event == 'pull_request_review':
-#         action = payload.get('action')
-#         logging.info(f"Action: {action}")
-
-#         if action == 'submitted':
-#             review = payload.get('review')
-#             state = review.get('state')
-#             logging.info(f"Review state: {state}")
-
-#             if state == 'approved':
-#                 logging.info("Pull request detected and approved")
-#                 try:
-#                     update_documentation()
-#                     return jsonify({'message': 'Pull request detected and approved, documentation updated'}), 200
-#                 except Exception as e:
-#                     logging.error(f"Error updating documentation: {e}")
-#                     return jsonify({'message': 'Failed to update documentation'}), 500
-
-#     return jsonify({'message': 'No action taken'}), 200
-
-# def update_documentation():
-#     # Pull the latest code changes
-#     pull_latest_code_changes()
-
-#     # Update the README.md file
-#     update_readme()
-
-#     # Commit and push the updated README.md file
-#     push_updated_documentation()
-
-# def pull_latest_code_changes():
-#     try:
-#         repo = Repo(CODE_REPO_PATH)
-#         origin = repo.remotes.origin
-#         origin.pull()
-#         logging.info("Successfully pulled the latest changes")
-#     except GitCommandError as e:
-#         logging.error(f"Git pull failed: {e}")
-#         raise
-
-# def update_readme():
-#     readme_path = os.path.join(CODE_REPO_PATH, 'README.md')
-
-#     # Read the existing README.md file
-#     with open(readme_path, 'r', encoding='utf-8') as file:
-#         content = file.read()
-
-#     # Update the content as needed
-#     updated_content = content + "\n\n# Documentation Updated\nThe documentation has been updated."
-
-#     # Write the updated content back to README.md
-#     with open(readme_path, 'w', encoding='utf-8') as file:
-#         file.write(updated_content)
-
-# def push_updated_documentation():
-#     try:
-#         repo = Repo(CODE_REPO_PATH)
-#         repo.git.add('README.md')
-#         repo.index.commit('Update documentation after approved pull request')
-#         origin = repo.remotes.origin
-#         origin.push()
-#         logging.info("Successfully pushed the updated documentation")
-#     except GitCommandError as e:
-#         logging.error(f"Git push failed: {e}")
-#         raise
-
-# if __name__ == '__main__':
-#     app.run(debug=True, port=5000)
-
-# ^^ working code to push readme update to repo automatically
-
-# import os
-# from flask import Flask, request, jsonify
-# import logging
-# from git import Repo, GitCommandError
-# import anthropic
-# from together import Together
-
-# app = Flask(__name__)
-
-# # Configure logging
-# logging.basicConfig(level=logging.INFO)
-
-# # Path to your local testing repository
-# CODE_REPO_PATH = r"C:\Users\ramna\Documents\autodoc-testing"
-
-# @app.route('/webhook', methods=['POST'])
-# def webhook():
-#     event = request.headers.get('X-GitHub-Event')
-#     payload = request.json
-
-#     logging.info(f"Received event: {event}")
-
-#     if event == 'pull_request_review':
-#         action = payload.get('action')
-#         logging.info(f"Action: {action}")
-
-#         if action == 'submitted':
-#             review = payload.get('review')
-#             state = review.get('state')
-#             logging.info(f"Review state: {state}")
-
-#             if state == 'approved':
-#                 logging.info("Pull request detected and approved")
-#                 try:
-#                     update_documentation(payload)
-#                     return jsonify({'message': 'Pull request detected and approved, documentation updated'}), 200
-#                 except Exception as e:
-#                     logging.error(f"Error updating documentation: {e}")
-#                     return jsonify({'message': 'Failed to update documentation'}), 500
-
-#     return jsonify({'message': 'No action taken'}), 200
-
-# def update_documentation(payload):
-#     # Get the file name from the pull request payload
-#     file_name = "hi_there.txt" #get_changed_file_name(payload)
-
-#     # Pull the latest code changes
-#     pull_latest_code_changes()
-
-#     # Update the README.md file
-#     update_readme(file_name)
-
-#     # Commit and push the updated README.md file
-#     push_updated_documentation()
-
-# # def get_changed_file_name(payload):
-# #     # Assuming only one file is changed for simplicity
-# #     return payload['pull_request']['head']['repo']['full_name']
-
-# def pull_latest_code_changes():
-#     try:
-#         repo = Repo(CODE_REPO_PATH)
-#         origin = repo.remotes.origin
-#         origin.pull()
-#         logging.info("Successfully pulled the latest changes")
-#     except GitCommandError as e:
-#         logging.error(f"Git pull failed: {e}")
-#         raise
-
-# def update_readme(file_name):
-#     readme_path = os.path.join(CODE_REPO_PATH, 'README.md')
-
-#     # Read the existing README.md file
-#     with open(readme_path, 'r', encoding='utf-8') as file:
-#         content = file.read()
-
-#     # Generate description using OpenAI API
-#     description = generate_description(file_name, content)
-
-#     # Update the content with the generated description
-#     updated_content = content + f"\n\n# Documentation Updated for {file_name}\n{description}"
-
-#     # Write the updated content back to README.md
-#     with open(readme_path, 'w', encoding='utf-8') as file:
-#         file.write(updated_content)
-
-# def generate_description(file_name, readme_content):
-#     prompt = f"Analyze the file name and generate a description of the possible contents of the file. Make an educated guess.\n\nFile Name: {file_name}\n\nREADME Content:\n{readme_content}"
-#     client = anthropic.Anthropic(
-#         # defaults to os.environ.get("ANTHROPIC_API_KEY")
-#         api_key="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",
-#     ) 
-#     try:
-#         message = client.messages.create(
-#             model="claude-3-opus-20240229",
-#             max_tokens=1024,
-#             messages=[
-#                 {"role": "user", "content": prompt},
-#                 {"role": "assistant", "content": "You are a documentation generator."}
-#             ]
-#     )
-#         print(prompt)
-#         print(message.content[0].text)
-#         return message.content[0].text
-#     except Exception as e:
-#         logging.error(f"Claude API call failed: {e}")
-#         raise
-# def push_updated_documentation():
-#     try:
-#         repo = Repo(CODE_REPO_PATH)
-#         repo.git.add('README.md')
-#         repo.index.commit('Update documentation after approved pull request')
-#         origin = repo.remotes.origin
-#         origin.pull()
-#         origin.push()
-#         logging.info("Successfully pushed the updated documentation")
-#     except GitCommandError as e:
-#         logging.error(f"Git push failed: {e}")
-#         raise
-
-# if __name__ == '__main__':
-#     app.run(debug=True, port=5000)
-
-# working code to send filename + readme content to claude
-
 import os
+import time
 from flask import Flask, request, jsonify
 import logging
 from git import Repo, GitCommandError
@@ -223,85 +8,89 @@ from together import Together
 app = Flask(__name__)
 
 # Configure logging
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 
 # Path to your local testing repository
 CODE_REPO_PATH = r"C:\Users\ramna\Documents\autodoc-testing"
-client = Together(api_key="69ec5a5bc40d2784ec58256e035b6535581bc97e70ef2796f73c01a64cecc39c")  # os.environ.get("TOGETHER_API_KEY")
+client = Together(api_key="69ec5a5bc40d2784ec58256e035b6535581bc97e70ef2796f73c01a64cecc39c")
+
+# Add a global variable to track the last update time
+LAST_UPDATE_TIME = 0
+UPDATE_COOLDOWN = 60  # Cooldown period in seconds
 
 @app.route('/webhook', methods=['POST'])
 def webhook():
+    global LAST_UPDATE_TIME
+    current_time = time.time()
+    
     event = request.headers.get('X-GitHub-Event')
     payload = request.json
 
     logging.info(f"Received event: {event}")
+    logging.debug(f"Payload: {payload}")
 
-    if event == 'pull_request_review':
-        action = payload.get('action')
-        logging.info(f"Action: {action}")
+    if event in ['push', 'pull_request', 'pull_request_review']:
+        # Check if the update is due to our own push
+        if current_time - LAST_UPDATE_TIME < UPDATE_COOLDOWN:
+            logging.info("Ignoring webhook due to recent update")
+            return jsonify({'message': 'Ignored due to recent update'}), 200
 
-        if action == 'submitted':
-            review = payload.get('review')
-            state = review.get('state')
-            logging.info(f"Review state: {state}")
-
-            if state == 'approved':
-                logging.info("Pull request detected and approved")
-                try:
-                    update_documentation(payload)
-                    return jsonify({'message': 'Pull request detected and approved, documentation updated'}), 200
-                except Exception as e:
-                    logging.error(f"Error updating documentation: {e}")
-                    return jsonify({'message': 'Failed to update documentation'}), 500
+        try:
+            file_name = get_changed_file_name(payload)
+            update_documentation(file_name, payload)
+            LAST_UPDATE_TIME = current_time
+            return jsonify({'message': 'Documentation updated'}), 200
+        except Exception as e:
+            logging.error(f"Error updating documentation: {str(e)}", exc_info=True)
+            return jsonify({'message': 'Failed to update documentation'}), 500
 
     return jsonify({'message': 'No action taken'}), 200
 
-def update_documentation(payload):
-    # Get the file name from the pull request payload
-    file_name = "hi_there.txt"  # get_changed_file_name(payload)
+def get_changed_file_name(payload):
+    if 'pull_request' in payload:
+        return payload['pull_request'].get('title', 'Unknown PR')
+    elif 'commits' in payload and payload['commits']:
+        modified_files = payload['commits'][0].get('modified', [])
+        return modified_files[0] if modified_files else 'Unknown file'
+    elif 'ref' in payload:
+        return payload['ref'].split('/')[-1]  # Branch name
+    return 'Unknown change'
 
-    # Pull the latest code changes
-    pull_latest_code_changes()
-
-    # Update the README.md file
-    update_readme(file_name)
-
-    # Commit and push the updated README.md file
-    push_updated_documentation()
-
-# def get_changed_file_name(payload):
-#     # Assuming only one file is changed for simplicity
-#     return payload['pull_request']['head']['repo']['full_name']
-
-def pull_latest_code_changes():
+def get_file_content(file_path, commit_sha='HEAD'):
+    repo = Repo(CODE_REPO_PATH)
     try:
-        repo = Repo(CODE_REPO_PATH)
-        origin = repo.remotes.origin
-        origin.pull()
-        logging.info("Successfully pulled the latest changes")
-    except GitCommandError as e:
-        logging.error(f"Git pull failed: {e}")
-        raise
+        return repo.git.show(f'{commit_sha}:{file_path}')
+    except GitCommandError:
+        return ""
 
-def update_readme(file_name):
+def update_documentation(file_name, payload):
     readme_path = os.path.join(CODE_REPO_PATH, 'README.md')
+    file_path = os.path.join(CODE_REPO_PATH, file_name)
+
+    # Get current and previous file content
+    current_content = get_file_content(file_name)
+    previous_content = get_file_content(file_name, payload['before'])
+
+    # Generate diff
+    diff = generate_diff(previous_content, current_content)
 
     # Read the existing README.md file
     try:
         with open(readme_path, 'r', encoding='utf-8') as file:
-            content = file.read()
+            existing_content = file.read()
     except FileNotFoundError:
-        logging.error(f"README.md file not found at path: {readme_path}")
-        raise
-    except Exception as e:
-        logging.error(f"Error reading README.md file: {e}")
-        raise
+        existing_content = "# Autodoc - Automatically Updating Documentation\n\n"
 
     # Generate description using Together API
-    description = generate_description(file_name, content)
+    description = generate_description(file_name, existing_content, payload, current_content, previous_content, diff)
 
-    # Update the content with the generated description
-    updated_content = content + f"\n\n# Documentation Updated for {file_name}\n{description}"
+    # Update README content
+    updated_content = update_readme_content(existing_content, file_name, description)
+
+    # Check if content has actually changed
+    if updated_content == existing_content:
+        logging.info("No changes detected in README. Skipping update.")
+        return
 
     # Write the updated content back to README.md
     try:
@@ -311,8 +100,70 @@ def update_readme(file_name):
         logging.error(f"Error writing to README.md file: {e}")
         raise
 
-def generate_description(file_name, readme_content):
-    prompt = f"Analyze the file name and generate a description of the possible contents of the file. Make an educated guess.\n\nFile Name: {file_name}\n\nREADME Content:\n{readme_content}"
+    # Commit and push changes
+    push_updated_documentation()
+
+def generate_diff(old_content, new_content):
+    diff = difflib.unified_diff(old_content.splitlines(), new_content.splitlines(), lineterm='')
+    return '\n'.join(diff)
+
+def update_readme_content(existing_content, file_name, new_description):
+    header = """# Autodoc - Automatically Updating Documentation
+
+Autodoc works by using GitHub Actions to detect when a pull request is made. It then reviews the file, takes the previous docs, and annexes the new information into the docs using Llama 3, then pushes it to the README file to update the GitHub page automatically.
+"""
+
+    new_update = f"""## Latest Update: {file_name}
+
+{new_description}
+
+---
+
+"""
+
+    # Split the existing content
+    parts = existing_content.split('## Latest Update:', 1)
+    
+    if len(parts) > 1:
+        previous_updates = parts[1].split('## Previous Updates', 1)
+        if len(previous_updates) > 1:
+            previous_updates = "## Previous Updates" + previous_updates[1]
+        else:
+            previous_updates = ""
+    else:
+        previous_updates = ""
+
+    # Combine all parts
+    return f"{header}\n{new_update}{previous_updates}"
+
+def generate_description(file_name, readme_content, payload, current_content, previous_content, diff):
+    event_type = payload.get('action', 'push') if 'pull_request' in payload else 'push'
+    prompt = f"""Analyze the following information and generate a concise description of the changes:
+
+File Name: {file_name}
+Event Type: {event_type}
+Payload Excerpt: {str(payload)[:500]}...
+
+Current File Content:
+{current_content[:1000]}...
+
+Previous File Content:
+{previous_content[:1000]}...
+
+Diff:
+{diff[:1000]}...
+
+Current README Content:
+{readme_content[:1000]}...
+
+Please provide a structured response in the following format:
+1. Brief description of the change (1-2 sentences)
+2. Key modifications or additions (bullet points)
+3. Impact on existing documentation (if any)
+4. Any additional relevant information
+
+Keep the response concise and relevant to the specific change."""
+
     try:
         response = client.chat.completions.create(
             model="meta-llama/Llama-3-8b-chat-hf",
@@ -320,7 +171,6 @@ def generate_description(file_name, readme_content):
                 {"role": "user", "content": prompt}
             ]
         )
-        logging.info(f"Prompt sent: {prompt}")
         logging.info(f"Response received: {response.choices[0].message.content}")
         return response.choices[0].message.content
     except Exception as e:
@@ -328,18 +178,31 @@ def generate_description(file_name, readme_content):
         raise
 
 def push_updated_documentation():
+    repo = Repo(CODE_REPO_PATH)
     try:
-        repo = Repo(CODE_REPO_PATH)
-        repo.git.add('README.md')
-        repo.index.commit('Update documentation after approved pull request')
+        # Check if there's an ongoing merge
+        if repo.git.status('--porcelain'):
+            logging.warning("There are uncommitted changes. Attempting to resolve...")
+            repo.git.add('.')
+            repo.git.commit('-m', 'Resolve merge conflicts')
+        
+        # Pull changes
         origin = repo.remotes.origin
         origin.pull()
+        
+        # Add and commit README changes
+        repo.git.add('README.md')
+        repo.index.commit('Update documentation')
+        
+        # Push changes
         origin.push()
         logging.info("Successfully pushed the updated documentation")
     except GitCommandError as e:
-        logging.error(f"Git push failed: {e}")
+        logging.error(f"Git operation failed: {e}")
+        if "CONFLICT" in str(e):
+            logging.error("Merge conflict detected. Please resolve manually.")
         raise
 
 if __name__ == '__main__':
+    logging.info("Starting the Flask application")
     app.run(debug=True, port=5000)
-
