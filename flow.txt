@@ -1,0 +1,14 @@
+when a pr is pushed to the codebase, it compares the current file to the one that was just pushed, and updates the existing documentation with the changes.
+if there is no existing documentation, it creates it and organizes correctly. it may also be useful to see the version history of the docs to see what changed,
+so we may have to keep a record of every single document instead of just the current one for the comparison. and we need it to scale- can it maintain an accurate history 
+of documentation across several codebases of several repos of several files each, quickly, and low cost and a small footprint on the company? what do people put their docs 
+in right now? atlassian, docusaurus, sphinx. build a mst knowledge graph of ground truths to make sure the documentation is staying on track and its relatively accurate?
+
+connect to autodoc codebase, start with a readme that just says like "Documentation," then when I approve PRs (maybe change it to when code is pushed if possible) 
+it scans every file in the commit and pulls up the appropriate docs (dont know how to do this yet.) then it reads the contents of the file, saves it as the latest 
+version in the "history" (no idea how to implement) then AI will note the differences between past and current version of file and update docs accordingly. 
+
+future:
+- knowledge graph
+- across multiple repos
+- more integrations 
