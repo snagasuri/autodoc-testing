@@ -12,9 +12,9 @@ Here is the concise description of the changes:
 • The README.md file was updated with new content, including information about Autodoc and its functionality.
 • The file now includes a section on the latest update, which is the README.md file itself.
 
-**3. Impact on existing documentation:** The update does not appear to have any significant impact on existing documentation, as it primarily focuses on introducing the Autodoc project and its features.
+**3. Impact on existing documentation:** No significant impact on existing documentation, as the update primarily focuses on introducing the Autodoc project and its features.
 
-**4. Additional information:** The update changed the "Latest Update" section from "Unknown file" to "README.md".
+**4. Additional information:** The update corrected the "Latest Update" section from "Unknown file" to "README.md", indicating that the previous update was not properly recorded.
 
 ---
 
