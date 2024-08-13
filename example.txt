@@ -84,3 +84,5 @@
     ]
   }
 ]
+
+hiii im new information write about me in the readme :3
