@@ -4,18 +4,17 @@ Autodoc works by using GitHub Actions to detect when a pull request is made. It 
 
 ## Latest Update: example.txt
 
-Here is the concise description of the changes:
+Here is the structured response:
 
 **1. Brief description of the change:** A new commit was pushed to the main branch of the "autodoc-testing" repository, updating the README.md file with new content.
 
 **2. Key modifications or additions:**
-• No changes to the file content (example.txt) were detected.
 • The README.md file was updated with new content about Autodoc and its functionality.
 • The "Latest Update" section was corrected from "Unknown file" to "README.md".
 
 **3. Impact on existing documentation:** No significant impact on existing documentation, as the update primarily focuses on introducing the Autodoc functionality.
 
-**4. Additional information:** None.
+**4. Additional relevant information:** None.
 
 ---
 
