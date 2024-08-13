@@ -1,0 +1,86 @@
+[
+{
+    "id": "GCC_train_000749900",
+    "image": "GCC_train_000749900.jpg",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nPresent a compact description of the photo's key features."
+      },
+      {
+        "from": "gpt",
+        "value": "heart icon on a transparent vector image"
+      }
+    ]
+  },
+  {
+    "id": "GCC_train_000122183",
+    "image": "GCC_train_000122183.jpg",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "Present a compact description of the photo's key features.\n<image>"
+      },
+      {
+        "from": "gpt",
+        "value": "fried egg with a sprig of parsley on a transparent background ."
+      }
+    ]
+  },
+  {
+    "id": "GCC_train_001791652",
+    "image": "GCC_train_001791652.jpg",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nSummarize the visual content of the image."
+      },
+      {
+        "from": "gpt",
+        "value": "view of the tombstone for military commander and his wife"
+      }
+    ]
+  },
+  {
+    "id": "GCC_train_000559954",
+    "image": "GCC_train_000559954.jpg",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "Describe the image concisely.\n<image>"
+      },
+      {
+        "from": "gpt",
+        "value": "must see romanesque revival structure was built by author , the first archbishop ."
+      }
+    ]
+  },
+  {
+    "id": "GCC_train_002411650",
+    "image": "GCC_train_002411650.jpg",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nCreate a compact narrative representing the image presented."
+      },
+      {
+        "from": "gpt",
+        "value": "today adherents , person and ethnicity in fiction are celebrating holiday all over the world"
+      }
+    ]
+  },
+  {
+    "id": "GCC_train_001870201",
+    "image": "GCC_train_001870201.jpg",
+    "conversations": [
+      {
+        "from": "human",
+        "value": "<image>\nProvide a brief description of the given image."
+      },
+      {
+        "from": "gpt",
+        "value": "a cartoon illustration of a winged buffalo with an angry expression ."
+      }
+    ]
+  }
+]
