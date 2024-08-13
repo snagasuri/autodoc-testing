@@ -2,9 +2,9 @@
 
 Autodoc works by using GitHub Actions to detect when a pull request is made. It then reviews the file, takes the previous docs, and annexes the new information into the docs using Llama 3, then pushes it to the README file to update the GitHub page automatically.
 
-## Latest Update: Unknown file
+## Latest Update: README.md
 
-Here is the structured response:
+Here is the concise description of the changes:
 
 **1. Brief description of the change:** A new commit was pushed to the main branch of the "autodoc-testing" repository, updating the README.md file with new content.
 
@@ -14,7 +14,7 @@ Here is the structured response:
 
 **3. Impact on existing documentation:** The update does not appear to have any significant impact on existing documentation, as it primarily focuses on introducing the Autodoc project and its features.
 
-**4. Additional relevant information:** The update is part of the Autodoc project, which aims to automatically update documentation using GitHub Actions and Llama 3.
+**4. Additional information:** The update changed the "Latest Update" section from "README.md" to "Unknown file", indicating that the previous update was not properly recorded.
 
 ---
 
